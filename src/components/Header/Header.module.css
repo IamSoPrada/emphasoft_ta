@@ -1,0 +1,33 @@
+.header{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  background-color: #eeeeee;
+}
+
+.header__title {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .header__close__btn{
+    display: inline-block;
+    box-sizing: border-box;
+    border: none;
+    margin-top: 15px;
+    height: 48px;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #c1c1c1;
+    transition: all 0.2s ;
+}
