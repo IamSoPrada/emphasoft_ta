@@ -5,18 +5,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 ### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br />
@@ -27,42 +15,24 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Цели тестового задания
+![image](https://user-images.githubusercontent.com/64264723/133635372-ac25f29a-6387-4e42-b50d-80bb7b00ca70.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`Бекенд`: http://emphasoft-test-assignment.herokuapp.com/swagger/
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+`Username`: test_super
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`Password`: Nf<U4f<rDbtDxAPn
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Описание решения
+`Используемый стек`: `React, Redux`.
+Функционал авторизации и создания нового пользователя реализован с помощью библиотек `Formik И Yup` (валидация полей формы).
+Функционал сортировки пользователей по убыв./возр. и фильтрации реализован с помощью библиотеки `Lodash`.
+![image](https://user-images.githubusercontent.com/64264723/133638620-5c2eeb1a-8eb9-4d38-823a-98639da1ef15.png)
+![image](https://user-images.githubusercontent.com/64264723/133637772-68bd998c-8ff3-4839-b900-a79910e7a1f9.png)
+![image](https://user-images.githubusercontent.com/64264723/133637862-4c8ba0e2-7ec1-4d27-9eb7-8ea9145da3c9.png)
+![image](https://user-images.githubusercontent.com/64264723/133638752-9d632b9e-0b11-4e46-bdfa-f400f517c531.png)
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+                            
