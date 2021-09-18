@@ -5,6 +5,8 @@ import {
   FETCH_USERS_FAIL,
   CREATE_USER_SUCCESS,
   CREATE_USER_FAIL,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAIL
 } from "./types";
 
 axios.defaults.baseURL = "https://emphasoft-test-assignment.herokuapp.com/";
@@ -73,6 +75,30 @@ export const createUser =
       createUserError(err);
     }
   };
+const deleteUserError = (error) => {
+  return {
+    type: DELETE_USER_FAIL,
+    payload: error,
+  };
+};
+const deleteUser =
+    (id ) =>
+        async (dispatch) => {
+          const conf = {
+            headers: {
+              Authorization: `Token ${localStorage.getItem("token")}`,
+            },
+          };
+
+          try {
+            const res = await axios.delete(`api/v1/users/${id}`, conf);
+            dispatch({
+              type:   DELETE_USER_SUCCESS
+            });
+          } catch (err) {
+            deleteUserError(err);
+          }
+        };
 
 /* const fetchUser = (usersService, dispatch) => (id) => {
     dispatch(usersRequested())
@@ -81,4 +107,4 @@ export const createUser =
         .catch((err) => usersError(err))
 } */
 
-export { fetchUsers };
+export { fetchUsers , deleteUser};

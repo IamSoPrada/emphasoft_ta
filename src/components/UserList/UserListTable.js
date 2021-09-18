@@ -5,16 +5,17 @@ import { compose } from "../../utils"
 import { connect } from "react-redux"
 import ErrorIndicator from "../../error-indicator"
 import styles from "./UserListTable.module.css"
+import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { Helmet } from "react-helmet"
 
-import { fetchUsers } from "../../actions/users"
+import { fetchUsers, deleteUser } from "../../actions/users"
 import { onFindUsername } from '../../actions/find'
 import { sortById } from "../../actions/sort"
 
 import _ from "lodash"
 
 
-const UserListTable = ({ users, find, sortAsc }) => {
+const UserListTable = ({ users, find, sortAsc , del}) => {
 
     const [findUsername, setFindUsername] = useState("")
 
@@ -23,6 +24,10 @@ const UserListTable = ({ users, find, sortAsc }) => {
         e.target.dataset.id === "asc" ?
             res = _.orderBy(users, ['id', 'id'], ['asc', 'desc']) : res = _.orderBy(users, ['id', 'id'], ['desc', 'asc'])
         sortAsc(res)
+    }
+
+    const getIdAndDelete = (id) => {
+        del(id)
     }
 
     return (
@@ -53,6 +58,8 @@ const UserListTable = ({ users, find, sortAsc }) => {
                             <th>Username</th>
                             <th>Имя</th>
                             <th>Фамилия</th>
+                            <th >Edit</th>
+                            <th >Del</th>
                         </tr>
                     </thead>
                     <tbody >
@@ -60,18 +67,18 @@ const UserListTable = ({ users, find, sortAsc }) => {
                             users.map((user, idx) => {
                                 const { id, username, first_name, last_name } = user
                                 return (
-                                    <tr key={id}>
+                                    <tr key={id} >
                                         <td data-label="#">{idx + 1}</td>
                                         <td data-label="ID">{id}</td>
                                         <td data-label="Username">{username}</td>
                                         <td data-label="Имя">{first_name}</td>
                                         <td data-label="Фамилия">{last_name}</td>
+                                        <td data-label="Edit"><AiFillEdit onClick={()=> console.log(id)} style={{ cursor: "pointer" }} /></td>
+                                        <td data-label="Del"><AiFillDelete onClick={()=> getIdAndDelete(id)} style={{ cursor: "pointer" }} /></td>
                                     </tr>
                                 )
                             })
                         }
-
-
                     </tbody>
                 </table>
             </div>
@@ -88,7 +95,7 @@ class UsersListContainer extends Component {
     }
 
     render() {
-        const { users, loading, error, find, sortAsc, authenticated } = this.props
+        const { users, loading, error, find, sortAsc, authenticated, del } = this.props
 
         if (loading) {
             return <Spinner />
@@ -96,7 +103,7 @@ class UsersListContainer extends Component {
         if (error) {
             return <ErrorIndicator />
         }
-        return <UserListTable authenticated={authenticated} users={users} find={find} sortAsc={sortAsc} />
+        return <UserListTable authenticated={authenticated} users={users} find={find} sortAsc={sortAsc} del={del} />
     }
 }
 
@@ -119,7 +126,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         fetchUsers: fetchUsers(usersService, dispatch),
         find: (input) => dispatch(onFindUsername(input)),
-        sortAsc: (sorted) => dispatch(sortById(sorted))
+        sortAsc: (sorted) => dispatch(sortById(sorted)),
+        del: (id) => dispatch(deleteUser(id))
     }
 
 }

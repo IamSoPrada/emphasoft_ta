@@ -68,12 +68,14 @@ table caption {
 }
 
 table tr {
-  background-color: #f8f8f8;
   border: 1px solid #ddd;
   padding: 0.35em;
 }
 
-table th,
+table th {
+  background-color: #f8f8f8;
+  padding: 1em;
+}
 table td {
   padding: 0.625em;
   text-align: center;
