@@ -21,10 +21,10 @@ const CreateUser = ({ createUser, authenticated }) => {
       .required("Введите username."),
     firstName: Yup.string()
       .max(15, "Не более 15 символов")
-      .required("Введите имя."),
+      .required("Введите Имя."),
     lastName: Yup.string()
       .max(20, "Не более 20 символов.")
-      .required("Введите фамилию."),
+      .required("Введите Фамилию."),
     password: Yup.string()
       .required("Введите пароль.")
       .matches(
@@ -55,7 +55,8 @@ const CreateUser = ({ createUser, authenticated }) => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(e) => onSubmit(e)}>
+          onSubmit={(e) => onSubmit(e)}
+          >
           <Form className={styles.auth__form}>
             <div>
               <label htmlFor='username'>Username</label>

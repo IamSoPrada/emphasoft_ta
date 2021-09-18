@@ -35,6 +35,10 @@ const appUsers = (state, action) => {
                 error: null,
             };
         case DELETE_USER_SUCCESS:
+            return {
+                ...state,
+                users: state.users.filter(user => user.id !== payload),
+            };
         case CREATE_USER_SUCCESS:
             return {
                 ...state,

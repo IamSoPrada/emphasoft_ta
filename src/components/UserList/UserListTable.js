@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, {  useState, useEffect } from 'react'
 import Spinner from "../spinner"
 import { WithUsersService } from "../../hoc"
 import { compose } from "../../utils"
@@ -15,7 +15,7 @@ import { sortById } from "../../actions/sort"
 import _ from "lodash"
 
 
-const UserListTable = ({ users, find, sortAsc , del}) => {
+const UserListTable = ({ users, find, sortAsc , delUser}) => {
 
     const [findUsername, setFindUsername] = useState("")
 
@@ -26,8 +26,9 @@ const UserListTable = ({ users, find, sortAsc , del}) => {
         sortAsc(res)
     }
 
+
     const getIdAndDelete = (id) => {
-        del(id)
+        delUser(id)
     }
 
     return (
@@ -67,7 +68,7 @@ const UserListTable = ({ users, find, sortAsc , del}) => {
                             users.map((user, idx) => {
                                 const { id, username, first_name, last_name } = user
                                 return (
-                                    <tr key={id} >
+                                    <tr key={id} id={id}>
                                         <td data-label="#">{idx + 1}</td>
                                         <td data-label="ID">{id}</td>
                                         <td data-label="Username">{username}</td>
@@ -87,24 +88,17 @@ const UserListTable = ({ users, find, sortAsc , del}) => {
     )
 }
 
-class UsersListContainer extends Component {
-
-
-    componentDidMount() {
-        this.props.fetchUsers()
-    }
-
-    render() {
-        const { users, loading, error, find, sortAsc, authenticated, del } = this.props
-
+const UsersListContainer = ({ users, loading, error, find, sortAsc, authenticated, delUser, fetchUsers } ) =>{
+    useEffect(() =>  {
+        fetchUsers()
+    }, [fetchUsers])
         if (loading) {
             return <Spinner />
         }
         if (error) {
             return <ErrorIndicator />
         }
-        return <UserListTable authenticated={authenticated} users={users} find={find} sortAsc={sortAsc} del={del} />
-    }
+        return <UserListTable authenticated={authenticated} users={users} find={find} sortAsc={sortAsc} delUser={delUser} />
 }
 
 const mapStateToProps = ({ appUsers: { users, loading, error }, appFind: { findUsername }, appAuth : {authenticated} }) => {
@@ -127,7 +121,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         fetchUsers: fetchUsers(usersService, dispatch),
         find: (input) => dispatch(onFindUsername(input)),
         sortAsc: (sorted) => dispatch(sortById(sorted)),
-        del: (id) => dispatch(deleteUser(id))
+        delUser: (id) => dispatch(deleteUser(id))
     }
 
 }
