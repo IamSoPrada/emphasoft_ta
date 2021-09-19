@@ -5,9 +5,9 @@ import { compose } from "../../utils"
 import { connect } from "react-redux"
 import ErrorIndicator from "../../error-indicator"
 import styles from "./UserListTable.module.css"
-import { AiFillEdit, AiFillDelete } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 import { Helmet } from "react-helmet"
-
+import BasicModal from "../Modal/Modal"
 import { fetchUsers, deleteUser } from "../../actions/users"
 import { onFindUsername } from '../../actions/find'
 import { sortById } from "../../actions/sort"
@@ -74,7 +74,7 @@ const UserListTable = ({ users, find, sortAsc , delUser}) => {
                                         <td data-label="Username">{username}</td>
                                         <td data-label="Имя">{first_name}</td>
                                         <td data-label="Фамилия">{last_name}</td>
-                                        <td data-label="Edit"><AiFillEdit onClick={()=> console.log(id)} style={{ cursor: "pointer" }} /></td>
+                                        <td data-label="Edit"><BasicModal idUser={id}  username={username} firstName = {first_name}  lastName={last_name}  /> </td>
                                         <td data-label="Del"><AiFillDelete onClick={()=> getIdAndDelete(id)} style={{ cursor: "pointer" }} /></td>
                                     </tr>
                                 )

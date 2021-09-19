@@ -5,6 +5,8 @@ import {
   FETCH_USERS_FAIL,
   CREATE_USER_SUCCESS,
   CREATE_USER_FAIL,
+    EDIT_USER_SUCCESS,
+    EDIT_USER_FAIL,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAIL
 } from "./types";
@@ -75,12 +77,15 @@ export const createUser =
       createUserError(err);
     }
   };
+
 const deleteUserError = (error) => {
   return {
     type: DELETE_USER_FAIL,
     payload: error,
   };
 };
+
+
 const deleteUser =
     (id ) =>
         async (dispatch) => {
@@ -100,12 +105,43 @@ const deleteUser =
             deleteUserError(err);
           }
         };
+const editUserError = (error) => {
+    return {
+        type: EDIT_USER_FAIL,
+        payload: error,
+    };
+};
 
-/* const fetchUser = (usersService, dispatch) => (id) => {
-    dispatch(usersRequested())
-    usersService.getUser(id)
-        .then((data) => dispatch(usersLoaded(data)))
-        .catch((err) => usersError(err))
-} */
+ const editUser =
+    ({ id, username, first_name, last_name, password, is_active }) =>
+        async (dispatch) => {
+          const conf = {
+            headers: {
+              Accept: "application/json",
+              Authorization: `Token ${localStorage.getItem("token")}`,
+              "Content-Type": "application/json",
+            },
+              method: 'put'
+          };
+          const body = JSON.stringify({
+            username,
+            first_name,
+            last_name,
+            password,
+            is_active,
+          });
 
-export { fetchUsers , deleteUser};
+          try {
+            const res = await axios.put(`api/v1/users/${id}/`, body, conf);
+            dispatch({
+              type: EDIT_USER_SUCCESS,
+              payload: res.data,
+            });
+          } catch (err) {
+            editUserError(err);
+          }
+        };
+
+
+
+export { fetchUsers , deleteUser, editUser};

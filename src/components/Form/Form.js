@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Helmet } from "react-helmet";
-import { createUser } from "../actions/users";
+import { editUser } from "../../actions/users";
 import PropTypes from "prop-types";
-import { v4 as uuid } from "uuid";
-import styles from "./Login.module.css";
-const CreateUser = ({ createUser, authenticated }) => {
+import styles from "../../Pages/Login.module.css";
+
+const EditUserForm = ({ editUser, authenticated, idUser, username, firstName,  lastName }) => {
     const initialValues = {
         username: "",
         firstName: "",
@@ -34,17 +34,15 @@ const CreateUser = ({ createUser, authenticated }) => {
 
     const onSubmit = (e) => {
         const formData = {
-            id: uuid(),
+            id: idUser,
             username: e.username,
             first_name: e.firstName,
             last_name: e.lastName,
             password: e.password,
             is_active: true,
         };
-        createUser(formData);
+        editUser(formData);
     };
-
-    if (authenticated) {
         return (
             <div className={styles.auth}>
                 <Helmet>
@@ -63,6 +61,7 @@ const CreateUser = ({ createUser, authenticated }) => {
                                 className={styles.auth__form__input}
                                 name='username'
                                 type='text'
+                                placeholder ={username}
                             />
                             <div className={styles.auth__form_error}>
                                 <ErrorMessage name='username' />
@@ -74,6 +73,7 @@ const CreateUser = ({ createUser, authenticated }) => {
                                 className={styles.auth__form__input}
                                 name='firstName'
                                 type='text'
+                                placeholder ={firstName}
                             />
                             <div className={styles.auth__form_error}>
                                 <ErrorMessage name='firstName' />
@@ -86,6 +86,7 @@ const CreateUser = ({ createUser, authenticated }) => {
                                 className={styles.auth__form__input}
                                 name='lastName'
                                 type='text'
+                                placeholder ={lastName}
                             />
                             <div className={styles.auth__form_error}>
                                 <ErrorMessage name='lastName' />
@@ -102,18 +103,19 @@ const CreateUser = ({ createUser, authenticated }) => {
                                 <ErrorMessage name='password' />
                             </div>
                         </div>
+
                         <button className={styles.auth__form__button} type='submit'>
-                            Создать
+                            Сохранить
                         </button>
                     </Form>
                 </Formik>
             </div>
         );
     }
-};
 
-CreateUser.propTypes = {
-    createUser: PropTypes.func.isRequired,
+
+EditUserForm.propTypes = {
+    editUser: PropTypes.func.isRequired,
     authenticated: PropTypes.bool,
 };
 
@@ -121,4 +123,4 @@ const mapStateToProps = (state) => ({
     authenticated: state.appAuth.authenticated,
 });
 
-export default connect(mapStateToProps, { createUser })(CreateUser);
+export default connect(mapStateToProps, { editUser })(EditUserForm);

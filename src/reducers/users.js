@@ -4,6 +4,8 @@ import {
     FETCH_USERS_FAIL,
     CREATE_USER_SUCCESS,
     CREATE_USER_FAIL,
+    EDIT_USER_SUCCESS,
+    EDIT_USER_FAIL,
     DELETE_USER_SUCCESS,
     DELETE_USER_FAIL,
     SORTED_BY_ID,
@@ -39,6 +41,11 @@ const appUsers = (state, action) => {
                 ...state,
                 users: state.users.filter(user => user.id !== payload),
             };
+        case EDIT_USER_SUCCESS:
+            return {
+                ...state,
+                error: null
+            }
         case CREATE_USER_SUCCESS:
             return {
                 ...state,
@@ -49,6 +56,7 @@ const appUsers = (state, action) => {
                 ...state,
                 users: payload,
             };
+        case EDIT_USER_FAIL:
         case DELETE_USER_FAIL:
         case CREATE_USER_FAIL:
         case FETCH_USERS_FAIL:
