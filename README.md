@@ -6,6 +6,8 @@ In the project directory, you can run:
 
 ## Цели тестового задания
 ![image](https://user-images.githubusercontent.com/64264723/133635372-ac25f29a-6387-4e42-b50d-80bb7b00ca70.png)
+`Ссылка` : https://emphasoft-assignment.netlify.app/login
+
 
 `Бекенд`: http://emphasoft-test-assignment.herokuapp.com/swagger/
 
